@@ -23,13 +23,13 @@ array = dict(json_dictionary.json())["array"]
 
 result = []
 
-for i in range(0, len(array)):
-	if(array[i][0:len(prefix)] != prefix):
-		result.append(str(array[i]))
+for word in array:
+	if not word.startswith(prefix):
+		result.append(word)
 
 #Token to return to the server
 returning_token = {'token': api_token, 'array': result}
 
-finish = requests.post(v_endpoint, returning_token)
+finish = requests.post(v_endpoint, json=returning_token)
 
 print(finish.text)
